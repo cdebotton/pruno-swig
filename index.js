@@ -1,6 +1,6 @@
 "use strict";
 
-var pruno = module.parent.require('pruno');
+var shelljs = require('shelljs');
 var data = require('gulp-data');
 var swig = require('gulp-swig');
 var fs = require('fs');
@@ -29,8 +29,8 @@ SwigTask.getDefaults = function() {
 SwigTask.prototype.enqueue = function(gulp, params) {
   params || (params = {});
   var compiler = 'swig';
+  var topLevel = shelljs.pwd();
   var opts = distillOptions(SwigTask, params);
-  var topLevel = pruno.get('topLevel');
   var IGNORE_SEARCH = new RegExp('^'+ params.ignorePrefix);
 
   gulp.src(params.entry)
@@ -62,7 +62,7 @@ SwigTask.prototype.enqueue = function(gulp, params) {
     }))
     .pipe(swig(opts))
     .on('error', function(err) {
-      pruno.notify('SwigTask', err);
+      console.error(err);
     })
     .pipe(gulp.dest(params.dist));
 };
@@ -86,4 +86,4 @@ function distillOptions(Task, params) {
     }, {});
 }
 
-module.exports = pruno.extend(SwigTask);
+module.exports = SwigTask;
