@@ -15,7 +15,7 @@ SwigTask.displayName = 'SwigTask';
 
 SwigTask.getDefaults = function() {
   return {
-    data: '::src/templates/data',
+    dataSrc: '::src/templates/data',
     entry: '::src/templates/**/*.html',
     dist: '::dist',
     search: [
@@ -43,7 +43,7 @@ SwigTask.prototype.enqueue = function(gulp, params) {
       var data;
       var dataFile = path.join(
         topLevel,
-        params.data,
+        params.dataSrc,
         path.basename(file.path).replace(/\.html$/, '')
       );
 
