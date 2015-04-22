@@ -20,7 +20,8 @@ SwigTask.getDefaults = function() {
     dist: '::dist',
     search: [
       '::src/templates/**/*.html',
-      '::src/templates/data/**/*'
+      '::src/templates/data/**/*',
+      '::src/**/webpack-stats.json'
     ],
     ignorePrefix: '_'
   };
